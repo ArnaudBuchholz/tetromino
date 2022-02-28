@@ -1,0 +1,22 @@
+{
+  "name": "tetromino",
+  "version": "1.0.0",
+  "description": "Attempt to create a multi-threaded tetris",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArnaudBuchholz/tetromino.git"
+  },
+  "author": "Arnaud Buchholz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ArnaudBuchholz/tetromino/issues"
+  },
+  "homepage": "https://github.com/ArnaudBuchholz/tetromino#readme",
+  "dependencies": {
+    "reserve": "^1.14.0"
+  }
+}
