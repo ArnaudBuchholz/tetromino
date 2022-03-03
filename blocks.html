@@ -1,12 +1,16 @@
 <html>
   <head>
+    <meta charset="UTF-8">
     <script language="javascript" src="blocks.js"></script>
   </head>
   <body>
     <table>
       <thead>
         <tr>
-            <th>bloc</th>
+          <th>block</th>
+          <th>↷</th>
+          <th>↷</th>
+          <th>↷</th>
         </tr>
       </thead>
       <tbody>
@@ -17,17 +21,25 @@ const SIZE = 16
 const tbody = document.getElementsByTagName('tbody')[0]
 blocks.forEach(block => {
   const tr = tbody.appendChild(document.createElement('tr'))
-  const td = tr.appendChild(document.createElement('td'))
-  const { width, height, cx, cy, squares } = block.rotations[0]
-  const canvas = document.createElement('canvas')
-  canvas.setAttribute('width', width * SIZE)
-  canvas.setAttribute('height', height * SIZE)
-  td.appendChild(canvas)
-  const ctx = canvas.getContext('2d')
-  ctx.fillStyle = 'green'
-  squares.forEach(([x, y]) => {
-    ctx.fillRect((cx + x) * SIZE, (cy + y) * SIZE, SIZE, SIZE)
-  })
+  for (let rotation = 0; rotation < 4; ++rotation) {
+    const td = tr.appendChild(document.createElement('td'))
+    if (rotation < block.rotations.length) {
+      const { width, height, cx, cy, squares } = block.rotations[rotation]
+      const canvas = document.createElement('canvas')
+      canvas.setAttribute('width', width * SIZE)
+      canvas.setAttribute('height', height * SIZE)
+      td.appendChild(canvas)
+      const ctx = canvas.getContext('2d')
+      squares.forEach(([x, y]) => {
+        if (x === 0 && y === 0) {
+          ctx.fillStyle = '#44BB44'
+        } else {
+          ctx.fillStyle = '#22DD22'
+        }
+        ctx.fillRect((cx + x) * SIZE, (cy + y) * SIZE, SIZE, SIZE)
+      })
+    }
+  }
 })
     </script>
   </body>
