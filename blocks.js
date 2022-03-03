@@ -23,8 +23,8 @@ const blocks = [{
   XX
   XO
 */
-  rotations: 0,
-  definition: [[-1, -1], [-1, 0], [0, 0], [1, 0]]
+  rotations: 1,
+  definition: [[-1, -1], [-1, 0], [0, -1], [0, 0]]
 }, {
 /*
    OX
@@ -50,22 +50,30 @@ const blocks = [{
 
 blocks.forEach(block => {
   const { rotations, definition } = block
-  let xmin = 0, xmax = 0, ymin = 0, ymax = 0
-  definition.forEach(([x, y]) => {
-    xmin = Math.min(x, xmin)
-    xmax = Math.max(x, xmax)
-    ymin = Math.min(y, ymin)
-    ymax = Math.max(y, ymax)
-  })
-  const width = xmax - xmin + 1
-  const height = ymax - ymin + 1
 
-  block.rotations = new Array(rotations).fill(0)
-  block.rotations[0] = {
-    width,
-    height,
-    cx: -xmin,
-    cy: -ymin,
-    squares: definition
+  function finalize (rotation) {
+    let xMin = 0, xMax = 0, yMin = 0, yMax = 0
+    rotation.squares.forEach(([x, y]) => {
+      xMin = Math.min(x, xMin)
+      xMax = Math.max(x, xMax)
+      yMin = Math.min(y, yMin)
+      yMax = Math.max(y, yMax)
+    })
+    rotation.width = xMax - xMin + 1
+    rotation.height = yMax - yMin + 1
+    rotation.cx = -xMin
+    rotation.cy = -yMin
   }
+  
+  let squares = definition
+  block.rotations = new Array(rotations)
+    .fill(0)
+    .map((_, index) => {
+      const rotation = {
+        squares: [...squares]
+      }
+      squares = squares.map(([x, y]) => [-y, x])
+      return rotation
+    })
+  block.rotations.forEach(finalize)
 })
