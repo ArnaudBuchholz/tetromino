@@ -2,7 +2,7 @@ const blocks = [{
 /*
   XXOX
 */
-  rotations: 2,
+  rotations: 4,
   definition: [[-2, 0], [-1, 0], [0, 0], [1, 0]]
 }, {
 /*
@@ -30,7 +30,7 @@ const blocks = [{
    OX
   XX
 */
-  rotations: 2,
+  rotations: 4,
   definition: [[-1, 1], [0, 1], [0, 0], [1, 0]]
 }, {
 /*
@@ -44,7 +44,7 @@ const blocks = [{
   XO
    XX
 */
-  rotations: 2,
+  rotations: 4,
   definition: [[-1, 0], [0, 0], [0, 1], [1, 1]]
 }]
 
